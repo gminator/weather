@@ -67,13 +67,13 @@ class Day(object):
 		#Event Numbers
 		if l % 2  == 0:
 			f = int((l/2) - 1)
-			return (data[f] + data[f + 1])/2
+			return round((data[f] + data[f + 1])/2,2)
 
 		i = l//2
 		return data[i]
 
 	def average(sefl,data):
-		return sum(data)/len(data)
+		return round(sum(data)/len(data),2)
 
 	def serialize(self,):
 		return {
@@ -132,7 +132,7 @@ class OpenWeather(object):
 		response = requests.request("GET", self.uri + "onecall/timemachine", 
 									headers=self.headers(), 
 									params=kwargs)
-		
+
 		return Day(units=kwargs["units"], **response.json())
 
 
