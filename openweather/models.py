@@ -8,7 +8,7 @@ class Day(object):
 	def unit(self,temp):
 		return round({
 			"c" : temp-274.15,
-			"k" : 274.15,
+			"k" : temp,
 			"f" : (((temp-274.15)/5) * 9) + 32,
 		}[self.units], 2)
 
