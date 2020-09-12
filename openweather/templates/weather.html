@@ -169,6 +169,13 @@
 				</div>
         </div>
     </div>
+    <div class="row user">
+        <div class="col-md-12">
+        	<div class="tile">
+        		<div id="chart"></div>
+        	</div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -181,8 +188,16 @@
 
 <script src='https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.js'></script>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 
 <script type="text/javascript"> 
+	google.charts.load("current", {packages:["corechart"]});
+	google.charts.setOnLoadCallback(draw_charts);
+	function draw_charts()
+
+	{
+	}
 	  $('#date').datepicker({
       	format: "yyyy/mm/dd",
       	autoclose: true,
@@ -242,6 +257,9 @@
 					}
 				}
 				$(".metrics").css({display : "block"})
+				
+				crate_a_chart(response.graph, "chart", {}, "LineChart", true)
+
 			}).fail(function(response){
 				hide_lpi()
 				$(".metrics").css({display : "none"})
@@ -264,6 +282,48 @@
 	{
 		$("#weather").find("i").removeClass("fa-cogs fa-spin").addClass("fa-cloud")
 	}
+
+
+	function crate_a_chart(source, target, extra, type, date=true){
+    	
+    	if(date)
+    	{
+    		for(i in source)
+    			{
+    				if(source[i][0] != "Date")
+    				{
+    					date = (source[i][0] ).split("-")   
+    					source[i][0] = new Date(source[i][0])	  
+    					console.log(source[i][0])
+    				} 
+    			}
+    	}
+		var data = google.visualization.arrayToDataTable(source);
+
+		var view = new google.visualization.DataView(data);
+		      
+
+				var options = { 
+					height : 280,
+					width : "100%",
+					legend: { position: "bottom" },
+					trendlines : false,
+					chartArea: {width: '90%', height: '80%', left : 50, top : 10}, 
+				};
+				options = {...options, ...extra}
+		      
+		      var chart = {
+		      	
+		      	"ComboChart" : new google.visualization.ComboChart(document.getElementById(target)),
+		      		"AreaChart" : new google.visualization.AreaChart(document.getElementById(target)),
+		      		"ColumnChart" : new google.visualization.ColumnChart(document.getElementById(target)),
+		      		"LineChart" : new google.visualization.LineChart(document.getElementById(target)),
+              "BarChart" : new google.visualization.BarChart(document.getElementById(target))
+		      }[type];
+
+		      chart.draw(view, options);
+
+    }
 </script>
 <style>
 	.metrics {display: none}

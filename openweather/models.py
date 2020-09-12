@@ -16,11 +16,14 @@ class Day(object):
 		self.lat = kwargs["lat"] if "lat" in kwargs else None
 		self.lng = kwargs["lon"] if "lon" in kwargs else None
 		self.tz = kwargs["timezone"] if "timezone" in kwargs else None
+		self.hourly = kwargs["hourly"] if "hourly" in kwargs else []
 		self.units = kwargs["units"] if "units" in kwargs else "c"
+
 
 		self.tmps = [self.unit(hour["temp"]) if "temp" in hour else None for hour in kwargs["hourly"]]
 		self.humids = [hour["humidity"] if "humidity" in hour else None for hour in kwargs["hourly"]]
 		self.winds = [round(hour["wind_speed"] /1.60934,2) if "wind_speed" in hour else None for hour in kwargs["hourly"]]
+
 	
 	@property
 	def median_humidity(self,):
@@ -88,8 +91,21 @@ class Day(object):
 				"max" : self.max_humidity,
 				"median" : self.median_humidity,
 				"avg" : self.avg_humidity,
-			}
+			},
+			"graph" : self.graph()
 		}
+
+	def graph(self,):
+		data = {}
+		for row in self.hourly:
+			key = datetime.fromtimestamp(row["dt"]).strftime("%Y-%m-%d %H:%M")
+			if key not in data:
+				data[key] = [self.unit(row["temp"]), row["humidity"]]
+		graph = [["Date", "Temp", "Humidity"]]
+
+		for date,values in data.items():
+			graph.append([date] + values) 
+		return graph
 
 
 
@@ -114,6 +130,15 @@ class OpenWeather(object):
 
 		@param dt int Unix Time Stamp 
 		"""
+		return Day(
+			units=kwargs["units"],
+			hourly=[
+			{"dt" : 1599868800, "temp": 274.15,"humidity": 10, "wind_speed" : 1.60934},
+			{"dt" : 1599872400, "temp": 274.15 + 12,"humidity": 10, "wind_speed" : 1.60934},
+			{"dt" : 1599876000,"temp": 274.15 + 30,"humidity": 10, "wind_speed" : 1.60934},
+			{"dt" : 1599879600,"temp": 274.15 + 6,"humidity": 10, "wind_speed" : 1.60934},
+			{"dt" : 1599883200,"temp": 274.15 + 17,"humidity": 10, "wind_speed" : 1.60934}
+		]) 
 		current_date = datetime.now()
 
 		if "stub" in kwargs:
