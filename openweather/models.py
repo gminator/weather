@@ -130,15 +130,15 @@ class OpenWeather(object):
 
 		@param dt int Unix Time Stamp 
 		"""
-		return Day(
-			units=kwargs["units"],
-			hourly=[
-			{"dt" : 1599868800, "temp": 274.15,"humidity": 10, "wind_speed" : 1.60934},
-			{"dt" : 1599872400, "temp": 274.15 + 12,"humidity": 10, "wind_speed" : 1.60934},
-			{"dt" : 1599876000,"temp": 274.15 + 30,"humidity": 10, "wind_speed" : 1.60934},
-			{"dt" : 1599879600,"temp": 274.15 + 6,"humidity": 10, "wind_speed" : 1.60934},
-			{"dt" : 1599883200,"temp": 274.15 + 17,"humidity": 10, "wind_speed" : 1.60934}
-		]) 
+		# return Day(
+		# 	units=kwargs["units"],
+		# 	hourly=[
+		# 	{"dt" : 1599868800, "temp": 274.15,"humidity": 10, "wind_speed" : 1.60934},
+		# 	{"dt" : 1599872400, "temp": 274.15 + 12,"humidity": 10, "wind_speed" : 1.60934},
+		# 	{"dt" : 1599876000,"temp": 274.15 + 30,"humidity": 10, "wind_speed" : 1.60934},
+		# 	{"dt" : 1599879600,"temp": 274.15 + 6,"humidity": 10, "wind_speed" : 1.60934},
+		# 	{"dt" : 1599883200,"temp": 274.15 + 17,"humidity": 10, "wind_speed" : 1.60934}
+		# ]) 
 		current_date = datetime.now()
 
 		if "stub" in kwargs:
