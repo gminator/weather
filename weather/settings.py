@@ -25,7 +25,7 @@ SECRET_KEY = 'ks$7#@s%w0reu!rjxx#6!#t6-i=piy*)wy7+l9(xsc^sa9u1)n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.33.11"]
+ALLOWED_HOSTS = ["192.168.33.11", "weather.statnav.co.za"]
 
 
 # Application definition
