@@ -1,0 +1,253 @@
+{% extends "dashboard.html" %}
+{% block content %} 
+<div id="content-main" class="col-md-12">
+	<div class="row user">
+        <div class="col-md-12">
+        	<div class="tile">
+        		<div class="tile-content">
+        			<form id="form">
+	        			<h5>Tempriture (Units)</h5>
+						<div class="animated-radio-button">
+							
+							<label>
+								<input type="radio" name="unit" value="c" checked><span class="label-text">Celsius</span>
+							</label>
+							
+							<label>
+								<input type="radio" name="unit" value="f"><span class="label-text">Farenheit </span>
+							</label>
+
+							<label>
+								<input type="radio" name="unit" value="k"><span class="label-text">Kelvin </span>
+							</label>
+						</div>
+						
+	        			<div class="form-group">
+	                      <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+	                      <div class="input-group">
+	                        <div class="input-group-prepend">
+	                        	<span class="input-group-text">
+	                        		<i class="fa fa-street-view" aria-hidden="true"></i>
+	                        	</span>
+	                    	</div>
+	                        <input 
+		                        class="form-control" 
+		                        id="location" 
+		                        type="text" 
+		                        placeholder="Enter your location">
+	                      </div>
+	                    </div>
+
+	                    <div class="form-group">
+	                      <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+	                      <div class="input-group">
+	                        <div class="input-group-prepend">
+	                        	<span class="input-group-text">
+	                        		<i class="fa fa-calendar" aria-hidden="true"></i>
+	                        	</span>
+	                    	</div>
+	                        <input 
+		                        class="form-control" 
+		                        id="date" 
+		                        name="date"
+		                        type="text" 
+		                        placeholder="Choose your date">
+	                      </div>
+	                    </div>
+	                    <input type="hidden" name="lat" id="lat"/>
+	                    <input type="hidden" name="lng" id="lng"/>
+	                    <input type="hidden" name="address" id="address"/>
+
+		        		<a class="btn btn-block btn-success" href="#" id="weather">
+		        			<i class="fa fa-cloud" aria-hidden="true"></i>
+
+		        			Get Weather
+		        		</a>
+	        		</div>	
+        		</form>
+        	</div>
+        </div>
+    </div>
+    <h5 id="title" class="metrics">This Is Test</h5>
+    <h6 id="datelabel"  class="metrics" style="margin-bottom: 20px;">This Is Test</h6>
+    <div class="row">
+        
+        <div class="col-md temp-min metrics">
+				<div class="widget-small primary coloured-icon"><i class="icon fa fa-thermometer-quarter  fa-3x"></i>
+				<div class="info">
+				<h4>17°</h4>
+				<p><b>Min Temp</b></p>
+				</div>
+				</div>
+        </div>
+
+
+
+        <div class="col-md temp-median metrics">
+				<div class="widget-small info coloured-icon"><i class="icon fa  fa-thermometer-half  fa-3x"></i>
+				<div class="info">
+				<h4>20°</h4>
+				<p><b>Median  Temp</b></p>
+				</div>
+				</div>
+        </div>
+
+        <div class="col-md temp-avg metrics">
+				<div class="widget-small warning coloured-icon"><i class="icon fa  fa-thermometer-half  fa-3x"></i>
+				<div class="info">
+				<h4>20°</h4>
+				<p><b>Avg emp</b></p>
+				</div>
+				</div>
+        </div>
+        <div class="col-md temp-max metrics">
+				<div class="widget-small danger coloured-icon"><i class="icon fa fa-thermometer-three-quarters fa-3x"></i>
+				<div class="info">
+				<h4>20°</h4>
+				<p><b>Max Temp</b></p>
+				</div>
+				</div>
+        </div>
+    </div>
+
+     <div class="row">
+        
+        <div class="col-md humidity-min metrics">
+				<div class="widget-small primary coloured-icon"><i class="icon fa fa-tint  fa-3x"></i>
+				<div class="info">
+				<h4>17°</h4>
+				<p><b>Min Humidity</b></p>
+				</div>
+				</div>
+        </div>
+
+
+        <div class="col-md humidity-median metrics">
+				<div class="widget-small info coloured-icon"><i class="icon fa  fa-tint  fa-3x"></i>
+				<div class="info">
+				<h4>20</h4>
+				<p><b>Median Humidity</b></p>
+				</div>
+				</div>
+        </div>
+        
+
+
+        <div class="col-md humidity-avg metrics">
+				<div class="widget-small warning coloured-icon"><i class="icon fa  fa-tint  fa-3x"></i>
+				<div class="info">
+				<h4>20°</h4>
+				<p><b>Avg Humidity</b></p>
+				</div>
+				</div>
+        </div>
+
+        <div class="col-md humidity-max metrics">
+				<div class="widget-small danger coloured-icon"><i class="icon fa fa-tint fa-3x"></i>
+				<div class="info">
+				<h4>20°</h4>
+				<p><b>Max Humidity</b></p>
+				</div>
+				</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extrafoot %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization,drawing,places&amp;language=en&amp;key=AIzaSyDd3zsfj8NRviJkXU-KLax9hyH95WJwz_k"></script>
+
+<script src='https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.js'></script>
+
+
+<script type="text/javascript"> 
+	  $('#date').datepicker({
+      	format: "yyyy/mm/dd",
+      	autoclose: true,
+      	todayHighlight: true
+      });
+
+	lookup = input = document.getElementById('location');
+	autocomplete = new google.maps.places.Autocomplete(input, {});	
+	function main_address_lookup()
+    {
+    	var place = autocomplete.getPlace();
+    	$("#address").val(place.formatted_address)
+		$("#lat").val(place.geometry.location.lat())
+		$("#lng").val(place.geometry.location.lng()) 
+    }
+	autocomplete.addListener('place_changed', main_address_lookup);
+
+	$("#weather").unbind("click").click(function(){
+		validation = true
+		show_lpi()
+		form = $("#form").serializeArray()
+		data = {}
+		for (i in form){
+			field = form[i] 
+
+			if (!field.value)
+			{
+				validation = false
+				 $.notify({
+			      		message: "Please choose a " + field.name,
+			      		icon: 'fa fa-times' 
+			      	},{
+			      		type: "danger"
+			      	});
+				 	hide_lpi()
+			} else {
+				data[field.name] = field.value
+			}
+		}
+
+		if (validation)
+		{
+			console.log(data)
+			$.get("/api/weather",data).done(function(response){
+				var place = autocomplete.getPlace();
+				$("#title").html("Weather @ " + place.formatted_address)
+				$("#datelabel").html($("#date").val())
+				
+				hide_lpi()
+				symbols = {"temp" : "°", "humidity" : "%"}
+				var place = autocomplete.getPlace();
+				for (i in response)
+				{
+					for (b in response[i])
+					{
+						$("." + i + "-"+ b).find("h4").html(response[i][b] + symbols[i])
+					}
+				}
+				$(".metrics").css({display : "block"})
+			}).fail(function(response){
+				hide_lpi()
+				$(".metrics").css({display : "none"})
+				$.notify({
+			      		message: "We could not retrieve your results",
+			      		icon: 'fa fa-times' 
+			      	},{
+			      		type: "danger"
+			      	});
+			})
+		}
+		
+	})
+
+	function show_lpi()
+	{
+		$("#weather").find("i").removeClass("fa-cloud").addClass("fa-cogs fa-spin")
+	}
+	function hide_lpi()
+	{
+		$("#weather").find("i").removeClass("fa-cogs fa-spin").addClass("fa-cloud")
+	}
+</script>
+<style>
+	.metrics {display: none}
+</style>
+{% endblock %}
