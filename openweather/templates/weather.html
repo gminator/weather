@@ -1,4 +1,22 @@
 {% extends "dashboard.html" %}
+
+
+{% block appmenu %}
+ <div class="app-sidebar "> 
+    <ul class="app-menu"> 
+		{% block pagemenu %}
+		<li>
+			<a class="app-menu__item {% if request.path == adminurl %}active{% endif %}"
+			   href="/weather/">
+			    <i class="app-menu__icon fa fa-home"></i>
+			    <span class="app-menu__label">Home</span>
+			</a> 
+		</li>
+		{% endblock %} 
+    </ul>
+</div>
+{% endblock %}
+
 {% block content %} 
 <div id="content-main" class="col-md-12">
 	<div class="row user">
