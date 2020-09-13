@@ -169,7 +169,7 @@
 				</div>
         </div>
     </div>
-    <div class="row user">
+    <div class="row metrics">
         <div class="col-md-12">
         	<div class="tile">
         		<div id="chart"></div>
@@ -258,13 +258,19 @@
 				}
 				$(".metrics").css({display : "block"})
 				
-				crate_a_chart(response.graph, "chart", {}, "LineChart", true)
+				crate_a_chart(response.graph, "chart", {curveType : "function"}, "LineChart", true)
 
 			}).fail(function(response){
+				message = "We could not retrieve your results"
+				if(response.status == 400)
+				{
+					message = response.responseJSON.error
+				}
+
 				hide_lpi()
 				$(".metrics").css({display : "none"})
 				$.notify({
-			      		message: "We could not retrieve your results",
+			      		message: message,
 			      		icon: 'fa fa-times' 
 			      	},{
 			      		type: "danger"
@@ -308,7 +314,7 @@
 					width : "100%",
 					legend: { position: "bottom" },
 					trendlines : false,
-					chartArea: {width: '90%', height: '80%', left : 50, top : 10}, 
+					chartArea: {width: '90%', height: '80%', left : 30, top : 10, right : 10}, 
 				};
 				options = {...options, ...extra}
 		      

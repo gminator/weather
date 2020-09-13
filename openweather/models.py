@@ -7,7 +7,7 @@ class Day(object):
 
 	def unit(self,temp):
 		return round({
-			"c" : temp-274.15,
+			"c" : temp-273.15,
 			"k" : temp,
 			"f" : (((temp-274.15)/5) * 9) + 32,
 		}[self.units], 2)
@@ -130,28 +130,20 @@ class OpenWeather(object):
 
 		@param dt int Unix Time Stamp 
 		"""
-		# return Day(
-		# 	units=kwargs["units"],
-		# 	hourly=[
-		# 	{"dt" : 1599868800, "temp": 274.15,"humidity": 10, "wind_speed" : 1.60934},
-		# 	{"dt" : 1599872400, "temp": 274.15 + 12,"humidity": 10, "wind_speed" : 1.60934},
-		# 	{"dt" : 1599876000,"temp": 274.15 + 30,"humidity": 10, "wind_speed" : 1.60934},
-		# 	{"dt" : 1599879600,"temp": 274.15 + 6,"humidity": 10, "wind_speed" : 1.60934},
-		# 	{"dt" : 1599883200,"temp": 274.15 + 17,"humidity": 10, "wind_speed" : 1.60934}
-		# ]) 
 		current_date = datetime.now()
 
 		if "stub" in kwargs:
 			current_date = kwargs["stub"] 
 
 		limit = current_date - timedelta(days=5) 
-
+		if kwargs["dt"] < limit.timestamp():
+			raise BadDateException("Your date exceeds the the 5 day limit")
+			
 		if "dt" not in kwargs or kwargs["dt"] == None: raise BadRequest("Please set a time")
 		if "lat" not in kwargs or kwargs["lat"] == None: raise BadRequest("Please set a lattitude")
 		if "lon" not in kwargs or kwargs["lon"] == None: raise BadRequest("Please set a longtitude")
 
-		if kwargs["dt"] < limit.timestamp():
-			raise BadDateException("Your date exceeds the the 5 day limit")
+		
 
 		#raise Exception(kwargs)
 		response = requests.request("GET", self.uri + "onecall/timemachine", 
