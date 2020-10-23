@@ -37,3 +37,7 @@ This API is also consumed by the FrontEnd, it will return the ranges as well dat
 The application supports unit tests for basic scenarios for the calculation of Min, Max, Median & Average. 
 It also tests the API Integration through the use of python Mock Framework 
 
+# Hosting
+
+Hosted on EC2, caching & ssl fullfiled by Cloudflare 
+
